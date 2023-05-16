@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BMR 计算器</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 20px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #f0f0f0;
+      border-radius: 3px;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>BMR 计算器</h1>
+    <form id="myForm">
+      <label for="gender">性别：</label>
+      <select id="gender" required>
+        <option value="male">男性</option>
+        <option value="female">女性</option>
+      </select>
+
+      <label for="age">年龄：</label>
+      <input type="number" id="age" required>
+
+      <label for="height">身高（厘米）：</label>
+      <input type="number" id="height" required>
+
+      <label for="weight">体重（公斤）：</label>
+      <input type="number" id="weight" required>
+
+      <input type="submit" value="计算">
+    </form>
+
+    <div id="output" class="result"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById("myForm");
+    const outputDiv = document.getElementById("output");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const gender = form.elements.gender.value;
+      const age = parseInt(form.elements.age.value);
+      const height = parseInt(form.elements.height.value);
+      const weight = parseInt(form.elements.weight.value);
+
+      let bmr;
+
+      if (gender === "male") {
+        bmr = 66 + 13.75 * weight + 5 * height - 6.75 * age;
+      } else if (gender === "female") {
+        bmr = 655 + 9.56 * weight + 1.85 * height - 4.68 * age;
+      } else {
+        alert("性别输入无效！");
+      }
+
+      if (bmr) {
+        outputDiv.textContent = `您的BMR为：${bmr.toFixed(2)} 千卡/天`;
+      }
+    });
+  </script>
+</body>
+</html>
+``
